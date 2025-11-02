@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 interface ButtonProps extends TouchableOpacityProps {
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "light";
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
 }
@@ -19,6 +19,7 @@ export default function Button({
     primary: "bg-primary-500",
     secondary: "bg-gray-200",
     ghost: "bg-transparent",
+    light: 'bg-transsparent'
   };
 
   const sizeClasses = {
@@ -37,6 +38,7 @@ export default function Button({
     primary: "text-white",
     secondary: "text-gray-800",
     ghost: "text-gray-600",
+    light: "text-custom-light",
   };
 
   return (

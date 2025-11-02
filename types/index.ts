@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react-native";
+
 export type Category = {
   id: string;
   title: string;
@@ -10,6 +12,14 @@ export type Category = {
 export type MenuItem = {
   id: string;
   label: string;
-  icon: string;
+  icon: LucideIcon;
   route: string;
 };
+
+export type Wallpaper = {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  isFavorite?: boolean;
+}
