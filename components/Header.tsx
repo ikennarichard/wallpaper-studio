@@ -1,3 +1,6 @@
+import logo from "@/assets/images/logo.svg";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Image } from "expo-image";
 import { Text, TouchableOpacity, View } from "react-native";
 
 interface HeaderProps {
@@ -7,20 +10,17 @@ interface HeaderProps {
 
 export default function Header({ title, onMenuPress }: HeaderProps) {
   return (
-    <View className="flex-row items-center justify-between px-5 py-4 bg-white border-b border-gray-100">
+    <View className="flex-row items-center justify-between px-2 py-4 bg-white border-b border-gray-100 drop-shadow-md">
       <View className="flex-row items-center gap-2">
         <View className="w-2 h-2 bg-primary-500 rotate-45" />
-        <Text className="text-lg font-bold text-gray-900">{title}</Text>
+        <Image source={logo} style={{ width: 14, height: 14 }} />
+        <Text className="text-sm text-black font-poppins-regular">{title}</Text>
       </View>
-      {onMenuPress && (
+      {onMenuPress ? (
         <TouchableOpacity onPress={onMenuPress} className="p-2">
-          <View className="space-y-1">
-            <View className="w-6 h-0.5 bg-gray-800" />
-            <View className="w-6 h-0.5 bg-gray-800" />
-            <View className="w-6 h-0.5 bg-gray-800" />
-          </View>
+          <MaterialIcons name="menu" size={24} color="black" />
         </TouchableOpacity>
-      )}
+      ) : null}
     </View>
   );
 }
