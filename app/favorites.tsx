@@ -60,19 +60,29 @@ export default function Favorites() {
     );
   }
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingVertical: 15, paddingInline: 15 }}>
       <GradientText text="Saved Wallpapers" />
       <Text className="font-poppins-regular text-sm text-textSecondary">
         Your saved wallpaper collection
       </Text>
       <ScrollView
-        className="bg-gray-50"
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ padding: 20 }}
+        contentContainerStyle={{ marginTop: 15 }}
       >
-        <View className="flex-row flex-wrap justify-between">
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            width: "100%",
+          }}
+        >
           {favorites.map((wallpaper) => (
-            <View key={wallpaper.id} className="w-[48%]">
+            <View
+              key={wallpaper.id}
+              style={{ width: 155, height: 290 }}
+              className="mb-2"
+            >
               <WallpaperCard
                 wallpaper={{
                   ...wallpaper,

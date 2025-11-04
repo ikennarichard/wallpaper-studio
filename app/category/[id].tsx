@@ -77,6 +77,7 @@ export default function CategoryScreen() {
                   }}
                   onPress={() => handleWallpaperPress(wallpaper)}
                   onFavoritePress={() => toggleFavorite(wallpaper)}
+                  isFavorite={isFavorite(wallpaper.id)}
                 />
               </View>
             ))}
@@ -97,6 +98,7 @@ export default function CategoryScreen() {
                   }}
                   onPress={() => handleWallpaperPress(wallpaper)}
                   onFavoritePress={() => toggleFavorite(wallpaper)}
+                  isFavorite={isFavorite(wallpaper.id)}
                 />
               </View>
             ))}

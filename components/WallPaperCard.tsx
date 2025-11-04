@@ -17,6 +17,7 @@ export default function WallpaperCard({
   onFavoritePress,
   isFavorite,
 }: WallpaperCardProps) {
+  console.log(isFavorite)
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9} className="mb-4">
       <Card className="h-full overflow-hidden w-full">
