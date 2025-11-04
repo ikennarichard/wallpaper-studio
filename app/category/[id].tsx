@@ -1,5 +1,6 @@
 import Toggle from "@/components/Toggle";
 import WallpaperCard from "@/components/WallPaperCard";
+import { useFavorites } from "@/context/FavoriteContext";
 import { wallpapers } from "@/utils/data";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
@@ -10,17 +11,9 @@ export default function CategoryScreen() {
   const router = useRouter();
   const { id, name } = useLocalSearchParams();
   const [view, setView] = useState<"grid" | "list">("grid");
-  const [favorites, setFavorites] = useState<string[]>(["2"]);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const categoryWallpapers = wallpapers.filter((w) => w.category === name);
-
-  const toggleFavorite = (wallpaperId: string) => {
-    setFavorites((prev) =>
-      prev.includes(wallpaperId)
-        ? prev.filter((id) => id !== wallpaperId)
-        : [...prev, wallpaperId]
-    );
-  };
 
   const handleWallpaperPress = (wallpaper: any) => {
     router.push({
@@ -80,11 +73,10 @@ export default function CategoryScreen() {
                 <WallpaperCard
                   wallpaper={{
                     ...wallpaper,
-                    isFavorite: favorites.includes(wallpaper.id),
+                    isFavorite: isFavorite(wallpaper.id),
                   }}
                   onPress={() => handleWallpaperPress(wallpaper)}
-                  onFavoritePress={() => toggleFavorite(wallpaper.id)}
-                  isFavorite={favorites.includes(wallpaper.id)}
+                  onFavoritePress={() => toggleFavorite(wallpaper)}
                 />
               </View>
             ))}
@@ -93,24 +85,18 @@ export default function CategoryScreen() {
           <View
             style={{
               width: "100%",
-
             }}
           >
             {categoryWallpapers.map((wallpaper) => (
-              <View
-                key={wallpaper.id}
-                style={{ height: 290 }}
-                className="mb-2"
-              >
+              <View key={wallpaper.id} style={{ height: 290 }} className="mb-2">
                 <WallpaperCard
                   key={wallpaper.id}
                   wallpaper={{
                     ...wallpaper,
-                    isFavorite: favorites.includes(wallpaper.id),
+                    isFavorite: isFavorite(wallpaper.id),
                   }}
                   onPress={() => handleWallpaperPress(wallpaper)}
-                  onFavoritePress={() => toggleFavorite(wallpaper.id)}
-                  isFavorite={favorites.includes(wallpaper.id)}
+                  onFavoritePress={() => toggleFavorite(wallpaper)}
                 />
               </View>
             ))}

@@ -1,6 +1,7 @@
 export const colors = {
   primary: "#f97316",
   background: "#ffffff",
+  backgroundNeutral: 'rgba(191, 191, 191, 0.2)',
   text: {
     primary: "#575757",
     secondary: "#6b7280",

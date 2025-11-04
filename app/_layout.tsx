@@ -1,6 +1,7 @@
 import Drawer from "@/components/Drawer";
 import Header from "@/components/Header";
 import MenuItem from "@/components/MenuItem";
+import { FavoritesProvider } from "@/context/FavoriteContext";
 import "@/global.css";
 import { menuItems } from "@/utils/data";
 import {
@@ -9,7 +10,7 @@ import {
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
 import { useFonts } from "expo-font";
-import { Stack, usePathname, useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
@@ -65,33 +66,38 @@ function RootLayoutNav() {
   return (
     <>
       <StatusBar style="dark" />
-      <SafeAreaView className="flex-1 bg-white">
-        <Header
-          title="Wallpaper Studio"
-          onMenuPress={() => setIsDrawerOpen(true)}
-        />
+      <FavoritesProvider>
+        <SafeAreaView className="flex-1 bg-white">
+          <Header
+            title="Wallpaper Studio"
+            onMenuPress={() => setIsDrawerOpen(true)}
+          />
 
-        <Stack screenOptions={{ headerShown: false }} initialRouteName="index">
-          <Stack.Screen name="index" />
-          <Stack.Screen name="browse" />
-          <Stack.Screen name="favorites" />
-          <Stack.Screen name="settings" />
-          <Stack.Screen name="category/[id]" />
-        </Stack>
-        <Drawer visible={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-          <View className="flex-1 pt-16">
-            <View className="py-4">
-              {menuItems.map((item) => (
-                <MenuItem
-                  key={item.id}
-                  item={item}
-                  onPress={() => handleMenuItemPress(item.route)}
-                />
-              ))}
+          <Stack
+            screenOptions={{ headerShown: false }}
+            initialRouteName="index"
+          >
+            <Stack.Screen name="index" />
+            <Stack.Screen name="browse" />
+            <Stack.Screen name="favorites" />
+            <Stack.Screen name="settings" />
+            <Stack.Screen name="category/[id]" />
+          </Stack>
+          <Drawer visible={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+            <View className="flex-1 pt-16">
+              <View className="py-4">
+                {menuItems.map((item) => (
+                  <MenuItem
+                    key={item.id}
+                    item={item}
+                    onPress={() => handleMenuItemPress(item.route)}
+                  />
+                ))}
+              </View>
             </View>
-          </View>
-        </Drawer>
-      </SafeAreaView>
+          </Drawer>
+        </SafeAreaView>
+      </FavoritesProvider>
     </>
   );
 }

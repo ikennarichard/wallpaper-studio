@@ -2,6 +2,7 @@ import empty from "@/assets/images/emptyfavorites.png";
 import Button from "@/components/Button";
 import GradientText from "@/components/GradientText";
 import WallpaperCard from "@/components/WallPaperCard";
+import { useFavorites } from "@/context/FavoriteContext";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -24,21 +25,37 @@ export default function Favorites() {
   };
   if (favorites.length === 0) {
     return (
-      <View className="flex-1 bg-white items-center justify-center px-5">
-        <Image
-          source={empty}
-          style={{
-            width: 197,
-            height: 185,
-          }}
-        />
-        <Text className="text-2xl font-bold text-gray-900 mb-2">
-          Your Favourites
+      <View style={{ flex: 1, paddingVertical: 15, paddingInline: 15 }}>
+        <GradientText text="Saved Wallpapers" />
+        <Text className="font-poppins-regular text-sm text-textSecondary">
+          Your saved wallpaper collection
         </Text>
-        <Text className="text-gray-600 text-center mb-6">
-          No favourites yet. Start adding wallpapers you love!
-        </Text>
-        <Button onPress={() => router.push("/")}>Browse Wallpapers</Button>
+        <View className="flex-1 items-center justify-center">
+          <Image
+            source={empty}
+            style={{
+              width: 197,
+              height: 185,
+              marginBottom: 40,
+            }}
+          />
+          <View className="items-center w-32 p-3">
+            <Text className="text-2xl font-poppins-medium text-gray-500 mb-2">
+              No Saved Wallpapers
+            </Text>
+            <Text className="text-gray-500 mb-6 text-xs font-poppins-regular">
+              Start saving your favorite wallpapers to see them here
+            </Text>
+          </View>
+          <Button onPress={() => router.push("/")}>
+            <Text
+              className="text-white font-poppins-medium text-sm"
+              style={{ padding: 5 }}
+            >
+              Browse Wallpapers
+            </Text>
+          </Button>
+        </View>
       </View>
     );
   }

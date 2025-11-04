@@ -4,7 +4,13 @@ import { colors } from "@/constants/colors";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Heart, Minimize2, SettingsIcon, Upload, X } from "lucide-react-native";
+import {
+  Heart,
+  Minimize2,
+  SettingsIcon,
+  Upload,
+  XCircle,
+} from "lucide-react-native";
 import { useState } from "react";
 import {
   Dimensions,
@@ -55,10 +61,9 @@ export default function WallpaperPreviewModal({
           <TouchableOpacity
             onPress={() => router.back()}
             style={styles.closeButton}
-            className="absolute top-3 mb-5"
             activeOpacity={0.8}
           >
-            <X size={16} color={colors.toggle.close} />
+            <XCircle size={16} color={colors.toggle.close} />
           </TouchableOpacity>
           <ScrollView
             contentContainerStyle={{
@@ -86,7 +91,10 @@ export default function WallpaperPreviewModal({
             </View>
 
             <View style={{ padding: 15, gap: 25 }}>
-              <Text className="text-3xl font-poppins-semibold text-black">
+              <Text
+                style={{ fontSize: 30 }}
+                className="font-poppins-semibold text-black"
+              >
                 Preview
               </Text>
 
@@ -103,7 +111,8 @@ export default function WallpaperPreviewModal({
                   {tags.map((tag, index) => (
                     <View
                       key={index}
-                      className="bg-gray-50 px-3 py-1.5 rounded-2xl border border-gray-200"
+                      className="px-3 py-1.5 rounded-2xl border border-gray-200"
+                      style={{ backgroundColor: colors.backgroundNeutral }}
                     >
                       <Text className="text-black text-sm font-poppins-regular">
                         {tag}
@@ -145,7 +154,7 @@ export default function WallpaperPreviewModal({
                   <SettingsIcon size={18} color={colors.text.light} />
                 </TouchableOpacity>
               </View>
-              <View className="gap-3">
+              <View style={{ gap: 12 }}>
                 <Button
                   variant="secondary"
                   onPress={() => setIsFavorite(!isFavorite)}
@@ -259,8 +268,9 @@ const styles = StyleSheet.create({
   closeButton: {
     width: 30,
     height: 30,
-
+    marginLeft: "auto",
     right: 10,
+    top: 10,
     borderRadius: 30,
     padding: 2,
     backgroundColor: colors.toggle.closeBg,

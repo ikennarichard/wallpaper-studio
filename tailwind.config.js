@@ -22,6 +22,7 @@ module.exports = {
 
         overlay: "var(--color-overlay)",
         backgroundSecondary: "var(--color-bg-secondary)",
+        backgroundNeutral: "var(--color-background-neutral)",
         textPrimary: "var(--color-text-primary)",
         textSecondary: "var(--color-text-secondary)",
         accent: "var(--color-accent)",

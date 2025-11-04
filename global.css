@@ -6,6 +6,8 @@
   --color-primary: #ffa821;
   --color-secondary: #6b7280;
   
+  --color-background-neutral: rgba(191, 191, 191, 0.2);
+
   --color-overlay: rgba(0, 0, 0, 0.3);
   --color-bg-secondary: rgba(251, 176, 59, 0.1);
 
