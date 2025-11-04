@@ -2,6 +2,7 @@ import Toggle from "@/components/Toggle";
 import WallpaperCard from "@/components/WallPaperCard";
 import { wallpapers } from "@/utils/data";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { ArrowLeft } from "lucide-react-native";
 import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -9,7 +10,7 @@ export default function CategoryScreen() {
   const router = useRouter();
   const { id, name } = useLocalSearchParams();
   const [view, setView] = useState<"grid" | "list">("grid");
-  const [favorites, setFavorites] = useState<string[]>(["2", "6"]);
+  const [favorites, setFavorites] = useState<string[]>(["2"]);
 
   const categoryWallpapers = wallpapers.filter((w) => w.category === name);
 
@@ -35,19 +36,23 @@ export default function CategoryScreen() {
 
   return (
     <View className="flex-1 bg-gray-50">
-      {/* Back Button & Title */}
-      <View className="px-5 pt-4 pb-2 bg-white">
+      <View className="px-4 pt-5 pb-2">
         <TouchableOpacity
           onPress={() => router.back()}
           className="flex-row items-center mb-4"
           activeOpacity={0.7}
+          style={{ marginBlockStart: 15, gap: 3 }}
         >
-          <Text className="text-gray-600 mr-2">←</Text>
-          <Text className="text-gray-600 text-sm">Back to Categories</Text>
+          <ArrowLeft size={15} />
+          <Text className="text-custom-light font-poppins-regular text-lg">
+            Back to Categories
+          </Text>
         </TouchableOpacity>
 
         <View className="flex-row items-center justify-between">
-          <Text className="text-3xl font-bold text-gray-900">{name}</Text>
+          <Text style={{ fontSize: 48, fontFamily: "Clash-Display-Regular" }}>
+            {name}
+          </Text>
           <Toggle view={view} onViewChange={setView} />
         </View>
       </View>
@@ -55,12 +60,23 @@ export default function CategoryScreen() {
       <ScrollView
         className="flex-1"
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ padding: 20 }}
+        contentContainerStyle={{ padding: 16 }}
       >
         {view === "grid" ? (
-          <View className="flex-row flex-wrap justify-between">
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              width: "100%",
+            }}
+          >
             {categoryWallpapers.map((wallpaper) => (
-              <View key={wallpaper.id} className="w-[48%]">
+              <View
+                key={wallpaper.id}
+                style={{ width: 155, height: 290 }}
+                className="mb-2"
+              >
                 <WallpaperCard
                   wallpaper={{
                     ...wallpaper,
@@ -68,22 +84,35 @@ export default function CategoryScreen() {
                   }}
                   onPress={() => handleWallpaperPress(wallpaper)}
                   onFavoritePress={() => toggleFavorite(wallpaper.id)}
+                  isFavorite={favorites.includes(wallpaper.id)}
                 />
               </View>
             ))}
           </View>
         ) : (
-          <View>
+          <View
+            style={{
+              width: "100%",
+
+            }}
+          >
             {categoryWallpapers.map((wallpaper) => (
-              <WallpaperCard
+              <View
                 key={wallpaper.id}
-                wallpaper={{
-                  ...wallpaper,
-                  isFavorite: favorites.includes(wallpaper.id),
-                }}
-                onPress={() => handleWallpaperPress(wallpaper)}
-                onFavoritePress={() => toggleFavorite(wallpaper.id)}
-              />
+                style={{ height: 290 }}
+                className="mb-2"
+              >
+                <WallpaperCard
+                  key={wallpaper.id}
+                  wallpaper={{
+                    ...wallpaper,
+                    isFavorite: favorites.includes(wallpaper.id),
+                  }}
+                  onPress={() => handleWallpaperPress(wallpaper)}
+                  onFavoritePress={() => toggleFavorite(wallpaper.id)}
+                  isFavorite={favorites.includes(wallpaper.id)}
+                />
+              </View>
             ))}
           </View>
         )}

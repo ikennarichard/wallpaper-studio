@@ -1,12 +1,17 @@
 import Button from "@/components/Button";
+import WallpaperSetupModal from "@/components/WalPaperSetupModal";
+import { colors } from "@/constants/colors";
 import { BlurView } from "expo-blur";
+import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { Heart, Minimize2, SettingsIcon, Upload, X } from "lucide-react-native";
 import { useState } from "react";
 import {
   Dimensions,
   ImageBackground,
   Modal,
   ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -14,10 +19,15 @@ import {
 
 const { height } = Dimensions.get("window");
 
-export default function WallpaperPreviewScreen() {
+export default function WallpaperPreviewModal({
+  isVisible,
+}: {
+  isVisible: false;
+}) {
   const router = useRouter();
   const { id, title, category, image } = useLocalSearchParams();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showSetupWallpeaper, setShowSetupWallpaper] = useState(false);
 
   const tags = ["Nature", "Ambience", "Flowers"];
   const description =
@@ -25,117 +35,226 @@ export default function WallpaperPreviewScreen() {
 
   return (
     <Modal
-      visible={true}
+      visible={isVisible}
       animationType="fade"
       transparent
       onRequestClose={() => router.back()}
     >
-      <BlurView intensity={80} className="flex-1">
-        <View className="flex-1 bg-black/40 justify-center items-center p-5">
-          {/* Close Button */}
+      {showSetupWallpeaper ? (
+        <WallpaperSetupModal
+          visible={showSetupWallpeaper}
+          onClose={() => setShowSetupWallpaper(false)}
+          onSave={(data) => console.log(data)}
+        />
+      ) : null}
+      <View style={styles.modalOverlay}>
+        <View
+          style={{ height }}
+          className="bg-white flex-1 rounded-2xl overflow-hidden w-full max-w-sm"
+        >
           <TouchableOpacity
             onPress={() => router.back()}
-            className="absolute top-12 right-5 z-10 w-10 h-10 rounded-full bg-primary-500 items-center justify-center"
+            style={styles.closeButton}
+            className="absolute top-3 mb-5"
             activeOpacity={0.8}
           >
-            <Text className="text-white text-2xl font-light">×</Text>
+            <X size={16} color={colors.toggle.close} />
           </TouchableOpacity>
-
-          {/* Content Container */}
-          <View
-            className="bg-white rounded-3xl overflow-hidden w-full max-w-md"
-            style={{ maxHeight: height * 0.85 }}
+          <ScrollView
+            contentContainerStyle={{
+              marginInline: "auto",
+              padding: 12,
+              margin: 35,
+            }}
+            showsVerticalScrollIndicator={false}
           >
-            {/* Phone Preview */}
-            <View className="items-center pt-6 pb-4">
-              <View className="w-48 h-96 rounded-[40px] border-4 border-gray-900 overflow-hidden bg-black">
-                {/* Notch */}
-                <View className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-black rounded-b-3xl z-10" />
-
-                {/* Wallpaper Image */}
+            <View style={styles.container}>
+              <View style={styles.phoneFrame}>
+                <View style={styles.notchContainer}>
+                  <View style={styles.notch} />
+                </View>
                 <ImageBackground
-                  source={{ uri: image as string }}
-                  className="flex-1"
+                  source={{
+                    uri: image as string,
+                  }}
                   resizeMode="cover"
-                >
-                  {/* Home Indicator */}
-                  <View className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-1 bg-white/80 rounded-full" />
-                </ImageBackground>
+                  style={styles.screenImage}
+                />
+
+                <View style={styles.homeIndicator} />
               </View>
             </View>
 
-            {/* Details Section */}
-            <ScrollView
-              className="flex-1 px-6"
-              showsVerticalScrollIndicator={false}
+            <View
+              style={{ padding: 15, gap: 25 }}
             >
-              <Text className="text-3xl font-bold text-gray-900 mb-1">
+              <Text className="text-3xl font-poppins-semibold text-black">
                 Preview
               </Text>
 
-              {/* Name */}
-              <View className="mb-4">
-                <Text className="text-gray-500 text-sm mb-1">Name</Text>
-                <Text className="text-gray-900 text-xl font-bold">{title}</Text>
+              <View className="mb-3">
+                <Text className="text-gray-400 text-sm mb-1">Name</Text>
+                <Text className="text-black text-2xl font-poppins-medium">
+                  {title}
+                </Text>
               </View>
 
-              {/* Tags */}
-              <View className="mb-4">
-                <Text className="text-gray-500 text-sm mb-2">Tags</Text>
+              <View className="mb-3">
+                <Text className="text-gray-400 text-sm mb-2">Tags</Text>
                 <View className="flex-row flex-wrap gap-2">
                   {tags.map((tag, index) => (
                     <View
                       key={index}
-                      className="bg-gray-100 px-4 py-2 rounded-full"
+                      className="bg-gray-50 px-3 py-1.5 rounded-2xl border border-gray-200"
                     >
-                      <Text className="text-gray-700 text-sm">{tag}</Text>
+                      <Text className="text-black text-sm font-poppins-regular">
+                        {tag}
+                      </Text>
                     </View>
                   ))}
                 </View>
               </View>
 
-              {/* Description */}
-              <View className="mb-6">
-                <Text className="text-gray-500 text-sm mb-2">Description</Text>
-                <Text className="text-gray-600 text-sm leading-6">
+              <LinearGradient
+                colors={["#BFBFBF33", "#FFFFFF"]}
+                start={{ x: 0, y: 10 }}
+                end={{ x: 0, y: 0 }}
+              >
+                <BlurView
+                  intensity={40}
+                  tint="light"
+                  style={styles.blurBottom}
+                />
+                <Text className="text-gray-400 text-sm font-poppins-regular mb-2">Description</Text>
+                <Text
+                  className="text-gray-600 text-sm leading-5 font-poppins-medium"
+                  numberOfLines={4}
+                >
                   {description}
                 </Text>
-              </View>
+              </LinearGradient>
 
-              {/* Action Buttons */}
-              <View className="flex-row gap-3 mb-4">
-                <TouchableOpacity className="w-12 h-12 bg-gray-100 rounded-xl items-center justify-center">
-                  <Text className="text-xl">↗</Text>
+              <View className="flex-row gap-2 mb-4">
+                <TouchableOpacity className="w-11 h-11 bg-gray-50 rounded-lg items-center justify-center border border-gray-200">
+                  <Upload size={18} color={colors.text.light} />
                 </TouchableOpacity>
-                <TouchableOpacity className="w-12 h-12 bg-gray-100 rounded-xl items-center justify-center">
-                  <Text className="text-xl">📌</Text>
+                <TouchableOpacity className="w-11 h-11 bg-gray-50 rounded-lg items-center justify-center border border-gray-200">
+                  <Minimize2 size={18} color={colors.text.light} />
                 </TouchableOpacity>
-                <TouchableOpacity className="w-12 h-12 bg-gray-100 rounded-xl items-center justify-center">
-                  <Text className="text-xl">⚙️</Text>
+                <TouchableOpacity className="w-11 h-11 bg-gray-50 rounded-lg items-center justify-center border border-gray-200">
+                  <SettingsIcon size={18} color={colors.text.light} />
                 </TouchableOpacity>
               </View>
-
-              {/* Main Actions */}
-              <View className="gap-3 pb-6">
+              <View className="gap-3">
                 <Button
                   variant="secondary"
                   onPress={() => setIsFavorite(!isFavorite)}
-                  className="flex-row items-center justify-center gap-2"
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 6,
+                    paddingVertical: 12,
+                  }}
+                  activeOpacity={0.8}
                 >
-                  <Text className="text-xl">{isFavorite ? "❤️" : "🤍"}</Text>
-                  <Text className="text-gray-800 font-semibold">
+                  {isFavorite ? <Heart size={18} /> : <Heart size={18} />}
+
+                  <Text className="text-gray-900 font-semibold text-sm">
                     Save to Favorites
                   </Text>
                 </Button>
 
-                <Button onPress={() => console.log("Set wallpaper")}>
-                  Set to Wallpaper
+                <Button
+                  onPress={() => setShowSetupWallpaper(true)}
+                  style={{ marginBottom: 20, paddingVertical: 12 }}
+                  className=""
+                >
+                  <Text className="text-white text-sm font-poppins-medium">Set to Wallpaper</Text>
                 </Button>
               </View>
-            </ScrollView>
-          </View>
+            </View>
+          </ScrollView>
         </View>
-      </BlurView>
+      </View>
     </Modal>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "transparent",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  blurBottom: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 30,
+    zIndex: 10,
+  },
+
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    paddingHorizontal: 20,
+    paddingTop: 50,
+    paddingBottom: 20,
+  },
+
+  phoneFrame: {
+    width: 200,
+    height: 425,
+    borderRadius: 35,
+    backgroundColor: "#000",
+    overflow: "hidden",
+    borderWidth: 3,
+    borderColor: "#000",
+    position: "relative",
+  },
+  notchContainer: {
+    position: "absolute",
+    top: 8,
+    left: "50%",
+    transform: [{ translateX: -45 }],
+    zIndex: 2,
+  },
+  notch: {
+    width: 90,
+    height: 25,
+    borderRadius: 15,
+    backgroundColor: "#000",
+  },
+  screenImage: {
+    flex: 1,
+    borderRadius: 30,
+  },
+  homeIndicator: {
+    position: "absolute",
+    bottom: 10,
+    left: "50%",
+    transform: [{ translateX: -40 }],
+    width: 80,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "#fff",
+    opacity: 0.3,
+  },
+  closeButton: {
+    width: 30,
+    height: 30,
+
+    right: 10,
+    borderRadius: 30,
+    padding: 2,
+    backgroundColor: colors.toggle.closeBg,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow:
+      "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)",
+  },
+});
