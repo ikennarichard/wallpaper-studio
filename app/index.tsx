@@ -26,7 +26,7 @@ export default function HomeScreen() {
               Categories
             </Text>
             <Button variant="light" size="sm">
-              See All
+              <Text>See All</Text>
             </Button>
           </View>
 

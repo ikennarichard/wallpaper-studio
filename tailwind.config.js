@@ -12,11 +12,20 @@ module.exports = {
         "clash-display-medium": ["Clash-Display-Medium"],
       },
       colors: {
-        "custom": {
+        custom: {
           primary: "#575757",
           secondary: "#6b7280",
           light: "#808080",
         },
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+
+        overlay: "var(--color-overlay)",
+        backgroundSecondary: "var(--color-bg-secondary)",
+        textPrimary: "var(--color-text-primary)",
+        textSecondary: "var(--color-text-secondary)",
+        accent: "var(--color-accent)",
+        lightGreen: "var(--color-light-green)",
       },
     },
   },

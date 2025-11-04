@@ -1,4 +1,13 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { colors } from "@/constants/colors";
+import React from "react";
+import {
+  StyleSheet,
+  TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewStyle,
+} from "react-native";
 
 interface ButtonProps extends TouchableOpacityProps {
   variant?: "primary" | "secondary" | "ghost" | "light";
@@ -8,49 +17,64 @@ interface ButtonProps extends TouchableOpacityProps {
 
 export default function Button({
   variant = "primary",
-  size = "md",
+  size = "sm",
   children,
-  className = "",
+  style,
   ...props
 }: ButtonProps) {
-  const baseClass = "rounded-lg items-center justify-center";
-
-  const variantClasses = {
-    primary: "bg-primary-500",
-    secondary: "bg-gray-200",
-    ghost: "bg-transparent",
-    light: 'bg-transsparent'
+  const variantStyles: Record<string, ViewStyle> = {
+    primary: { backgroundColor: colors.toggle.close },
+    secondary: { backgroundColor: "#E5E7EB" },
+    ghost: { backgroundColor: "transparent" },
+    light: { backgroundColor: "transparent" },
   };
 
-  const sizeClasses = {
-    sm: "px-3 py-2",
-    md: "px-4 py-3",
-    lg: "px-6 py-4",
+  const sizeStyles: Record<string, ViewStyle> = {
+    sm: { paddingVertical: 10, paddingHorizontal: 12 },
+    md: { paddingVertical: 12, paddingHorizontal: 16 },
+    lg: { paddingVertical: 16, paddingHorizontal: 24 },
   };
 
-  const textSizeClasses = {
-    sm: "text-sm",
-    md: "text-base",
-    lg: "text-lg",
+  const textColorStyles: Record<string, TextStyle> = {
+    primary: { color: "#FFFFFF" },
+    secondary: { color: "#1F2937" },
+    ghost: { color: "#4B5563" },
+    light: { color: "#F3F4F6" },
   };
 
-  const textColorClasses = {
-    primary: "text-white",
-    secondary: "text-gray-800",
-    ghost: "text-gray-600",
-    light: "text-custom-light",
+  const textSizeStyles: Record<string, TextStyle> = {
+    sm: { fontSize: 14 },
+    md: { fontSize: 16 },
+    lg: { fontSize: 18 },
   };
 
   return (
-    <TouchableOpacity
-      className={`${baseClass} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
-      {...props}
-    >
-      <Text
-        className={`font-semibold ${textSizeClasses[size]} ${textColorClasses[variant]}`}
+    <TouchableOpacity activeOpacity={0.8} {...props}>
+      <View
+        className="font-poppins-medium"
+        style={[
+          styles.base,
+          variantStyles[variant],
+          sizeStyles[size],
+          style as ViewStyle,
+          styles.textBase,
+          textSizeStyles[size],
+          textColorStyles[variant],
+        ]}
       >
         {children}
-      </Text>
+      </View>
     </TouchableOpacity>
   );
 }
+
+const styles = StyleSheet.create({
+  base: {
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textBase: {
+    // fontWeight: "600",
+  },
+});

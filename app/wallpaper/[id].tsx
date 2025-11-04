@@ -85,9 +85,7 @@ export default function WallpaperPreviewModal({
               </View>
             </View>
 
-            <View
-              style={{ padding: 15, gap: 25 }}
-            >
+            <View style={{ padding: 15, gap: 25 }}>
               <Text className="text-3xl font-poppins-semibold text-black">
                 Preview
               </Text>
@@ -125,7 +123,9 @@ export default function WallpaperPreviewModal({
                   tint="light"
                   style={styles.blurBottom}
                 />
-                <Text className="text-gray-400 text-sm font-poppins-regular mb-2">Description</Text>
+                <Text className="text-gray-400 text-sm font-poppins-regular mb-2">
+                  Description
+                </Text>
                 <Text
                   className="text-gray-600 text-sm leading-5 font-poppins-medium"
                   numberOfLines={4}
@@ -135,13 +135,13 @@ export default function WallpaperPreviewModal({
               </LinearGradient>
 
               <View className="flex-row gap-2 mb-4">
-                <TouchableOpacity className="w-11 h-11 bg-gray-50 rounded-lg items-center justify-center border border-gray-200">
+                <TouchableOpacity style={styles.iconContainer}>
                   <Upload size={18} color={colors.text.light} />
                 </TouchableOpacity>
-                <TouchableOpacity className="w-11 h-11 bg-gray-50 rounded-lg items-center justify-center border border-gray-200">
+                <TouchableOpacity style={styles.iconContainer}>
                   <Minimize2 size={18} color={colors.text.light} />
                 </TouchableOpacity>
-                <TouchableOpacity className="w-11 h-11 bg-gray-50 rounded-lg items-center justify-center border border-gray-200">
+                <TouchableOpacity style={styles.iconContainer}>
                   <SettingsIcon size={18} color={colors.text.light} />
                 </TouchableOpacity>
               </View>
@@ -170,7 +170,9 @@ export default function WallpaperPreviewModal({
                   style={{ marginBottom: 20, paddingVertical: 12 }}
                   className=""
                 >
-                  <Text className="text-white text-sm font-poppins-medium">Set to Wallpaper</Text>
+                  <Text className="text-white text-sm font-poppins-medium">
+                    Set to Wallpaper
+                  </Text>
                 </Button>
               </View>
             </View>
@@ -186,6 +188,17 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  iconContainer: {
+    width: 44,
+    height: 44,
+    backgroundColor: "#F9FAFB",
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
   },
 
   blurBottom: {

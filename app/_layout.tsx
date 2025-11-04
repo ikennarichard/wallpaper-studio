@@ -22,11 +22,6 @@ export {
   ErrorBoundary,
 } from "expo-router";
 
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "",
-};
-
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -59,7 +54,6 @@ function RootLayoutNav() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const router = useRouter();
-  const pathname = usePathname();
 
   const handleMenuItemPress = (route: string) => {
     setIsDrawerOpen(false);

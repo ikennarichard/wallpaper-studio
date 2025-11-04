@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-primary: #ffa821;
+  --color-secondary: #6b7280;
+  
+  --color-overlay: rgba(0, 0, 0, 0.3);
+  --color-bg-secondary: rgba(251, 176, 59, 0.1);
+
+  --color-text-primary: #575757;
+  --color-text-secondary: #808080;
+
+  --color-accent: #fbb03b;
+  --color-light-green: #c8ffbd;
+}
