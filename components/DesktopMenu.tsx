@@ -1,4 +1,4 @@
-import { menuItems } from "@/utils/data";
+import { menuItems } from "@/constants/data";
 import { usePathname, useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -23,7 +23,9 @@ export default function DesktopMenu() {
           `}
           >
             <item.icon size={20} strokeWidth={2} />
-            <Text className="text-sm font-poppins-regular capitalize">{item.label}</Text>
+            <Text className="text-sm font-poppins-regular capitalize">
+              {item.label}
+            </Text>
           </TouchableOpacity>
         );
       })}

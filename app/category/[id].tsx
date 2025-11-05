@@ -1,8 +1,8 @@
 import Toggle from "@/components/Toggle";
 import WallpaperCard from "@/components/WallPaperCard";
+import { wallpapers } from "@/constants/data";
 import { useFavorites } from "@/context/FavoriteContext";
 import { isWeb } from "@/utils";
-import { wallpapers } from "@/utils/data";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
 import { useState } from "react";
@@ -22,16 +22,13 @@ export default function CategoryScreen() {
   const [view, setView] = useState<"grid" | "list">("grid");
   const { isFavorite, toggleFavorite } = useFavorites();
 
-  
   const categoryWallpapers = wallpapers.filter((w) => w.category === name);
-  const [selectedWallpaper, setSelectedWallpaper] = useState(isWeb ? wallpapers[0] : undefined);
+  const [selectedWallpaper, setSelectedWallpaper] = useState(wallpapers[0]);
 
   const handleWallpaperPress = (wallpaper: any) => {
-    // For web: open modal directly
     if (Platform.OS === "web") {
       setSelectedWallpaper(wallpaper);
     } else {
-      // For mobile: navigate to modal route
       router.push({
         pathname: "/wallpaper/[id]",
         params: wallpaper,
@@ -72,10 +69,10 @@ export default function CategoryScreen() {
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "space-between",
+                justifyContent: isWeb ? "flex-start" : "space-between",
                 flexWrap: "wrap",
                 width: isWeb ? 611 : "100%",
-                gap: 8,
+                gap: 23,
               }}
             >
               {categoryWallpapers.map((wallpaper) => (
@@ -120,7 +117,7 @@ export default function CategoryScreen() {
             </View>
           )}
         </ScrollView>
-        <WallpaperPreviewModal  wallpaper={selectedWallpaper} isVisible={true} />
+        <WallpaperPreviewModal wallpaper={selectedWallpaper} isVisible={true} />
       </View>
     </View>
   );

@@ -1,8 +1,8 @@
 import ActiveWallpaper from "@/components/ActiveWallpaper";
 import Button from "@/components/Button";
 import CategoryCard from "@/components/CategoryCard";
+import { categories } from "@/constants/data";
 import { isWeb } from "@/utils";
-import { categories } from "@/utils/data";
 import { useRouter } from "expo-router";
 import { Platform, ScrollView, Text, View } from "react-native";
 
@@ -29,10 +29,10 @@ export default function HomeScreen() {
             style={{
               flexDirection: Platform.OS === "web" ? "row" : "column",
               overflow: "hidden",
-              flexWrap: Platform.OS === "web" ? "wrap" : 'nowrap',
+              flexWrap: Platform.OS === "web" ? "wrap" : "nowrap",
               marginInline: Platform.OS === "web" ? "auto" : 0,
               gap: isWeb ? 12 : 0,
-              paddingHorizontal: isWeb ? 10 : 0
+              paddingHorizontal: isWeb ? 10 : 0,
             }}
           >
             {categories.map((category) => (

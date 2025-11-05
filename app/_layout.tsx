@@ -1,9 +1,9 @@
 import Drawer from "@/components/Drawer";
 import Header from "@/components/Header";
 import MenuItem from "@/components/MenuItem";
+import { menuItems } from "@/constants/data";
 import { FavoritesProvider } from "@/context/FavoriteContext";
 import "@/global.css";
-import { menuItems } from "@/utils/data";
 import {
   Poppins_400Regular,
   Poppins_500Medium,

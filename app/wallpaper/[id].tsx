@@ -77,7 +77,7 @@ export default function WallpaperPreviewModal({
               </View>
               <ImageBackground
                 source={{
-                  uri: (image as string) || (wallpaper?.image as string),
+                  uri: isWeb ? (wallpaper?.image as string) : (image as string),
                 }}
                 resizeMode="cover"
                 style={styles.screenImage}
@@ -105,14 +105,14 @@ export default function WallpaperPreviewModal({
             <View className="mb-3">
               <Text className="text-gray-400 text-sm mb-1">Name</Text>
               <Text className="text-black text-2xl font-poppins-medium">
-                {title || wallpaper?.title}
+                {title ? title : wallpaper?.title}
               </Text>
             </View>
 
             <View className="mb-3">
               <Text className="text-gray-400 text-sm mb-2">Tags</Text>
               <View className="flex-row flex-wrap gap-2">
-                {tags.map((tag, index) => (
+                {wallpaper?.tags && wallpaper.tags.map((tag, index) => (
                   <View
                     key={index}
                     className="px-3 py-1.5 rounded-2xl border border-gray-200"
@@ -141,7 +141,7 @@ export default function WallpaperPreviewModal({
                   className="text-gray-600 text-sm leading-5 font-poppins-medium"
                   numberOfLines={4}
                 >
-                  {description}
+                  {wallpaper?.description}
                 </Text>
               </View>
               {!isWeb ? (
@@ -364,18 +364,5 @@ const styles = StyleSheet.create({
     backgroundColor: colors.toggle.closeBg,
     alignItems: "center",
     justifyContent: "center",
-    ...Platform.select({
-      web: {
-        boxShadow:
-          "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)",
-      },
-      default: {
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 5,
-      },
-    }),
   },
 });
