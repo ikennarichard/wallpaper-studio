@@ -1,4 +1,5 @@
 import { Category } from "@/types";
+import { isWeb } from "@/utils";
 import {
   Image,
   ImageBackground,
@@ -66,7 +67,13 @@ export default function CategoryCard({
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-      <Card className="h-48 mx-4 mb-4">
+      <Card
+        className="max-w-md mx-4 md:mx-0 mb-4"
+        style={{
+          width: isWeb ? 410 : 'auto',
+          height: isWeb ? 290 : 192
+        }}
+      >
         <ImageBackground
           source={{ uri: category.image }}
           className="flex-1"

@@ -72,8 +72,8 @@ export const wallpapers: Wallpaper[] = [
 
 
 export const menuItems: MenuItem[] = [
-  { id: '1', label: 'Home', icon: House, route: '/' },
-  { id: '2', label: 'Browse', icon: Grid3x3, route: '/browse' },
-  { id: '3', label: 'Favourites', icon: Heart, route: '/favorites' },
-  { id: '4', label: 'Settings', icon: Settings, route: '/settings' },
+  { id: '1', label: 'home', icon: House, route: '/', },
+  { id: '2', label: 'browse', icon: Grid3x3, route: '/browse' },
+  { id: '3', label: 'favorites', icon: Heart, route: '/favorites' },
+  { id: '4', label: 'settings', icon: Settings, route: '/settings' },
 ];

@@ -1,7 +1,8 @@
 import logo from "@/assets/images/logo.svg";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Image } from "expo-image";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
+import DesktopMenu from "./DesktopMenu";
 
 interface HeaderProps {
   title: string;
@@ -16,11 +17,13 @@ export default function Header({ title, onMenuPress }: HeaderProps) {
         <Image source={logo} style={{ width: 14, height: 14 }} />
         <Text className="text-sm text-black font-poppins-regular">{title}</Text>
       </View>
-      {onMenuPress ? (
+      {Platform.OS === "web" ? (
+        <DesktopMenu />
+      ) : (
         <TouchableOpacity onPress={onMenuPress} className="p-2">
           <MaterialIcons name="menu" size={24} color="black" />
         </TouchableOpacity>
-      ) : null}
+      )}
     </View>
   );
 }

@@ -6,7 +6,6 @@ export type Category = {
   description: string;
   wallpaperCount: number;
   image: string;
-  gradient?: string[];
 };
 
 export type MenuItem = {

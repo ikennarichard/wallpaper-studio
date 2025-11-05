@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import GradientText from "@/components/GradientText";
 import WallpaperCard from "@/components/WallPaperCard";
 import { useFavorites } from "@/context/FavoriteContext";
+import { isWeb } from "@/utils";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -26,7 +27,7 @@ export default function Favorites() {
   if (favorites.length === 0) {
     return (
       <View style={{ flex: 1, paddingVertical: 15, paddingInline: 15 }}>
-        <GradientText text="Saved Wallpapers" />
+        <GradientText text="Saved Wallpapers" variant={isWeb ? "lg" : "sm"} />
         <Text className="font-poppins-regular text-sm text-textSecondary">
           Your saved wallpaper collection
         </Text>
@@ -72,15 +73,20 @@ export default function Favorites() {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: isWeb ? 'flex-start' : "space-between",
             flexWrap: "wrap",
             width: "100%",
+            gap: 12
           }}
         >
           {favorites.map((wallpaper) => (
             <View
               key={wallpaper.id}
-              style={{ width: 155, height: 290 }}
+              style={{
+                width: 185,
+                minHeight: 290,
+                marginBottom: 8,
+              }}
               className="mb-2"
             >
               <WallpaperCard
@@ -90,6 +96,7 @@ export default function Favorites() {
                 }}
                 onPress={() => handleWallpaperPress(wallpaper)}
                 onFavoritePress={() => toggleFavorite(wallpaper)}
+                isFavorite={isFavorite(wallpaper.id)}
               />
             </View>
           ))}

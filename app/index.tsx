@@ -1,23 +1,18 @@
+import ActiveWallpaper from "@/components/ActiveWallpaper";
 import Button from "@/components/Button";
 import CategoryCard from "@/components/CategoryCard";
-import GradientText from "@/components/GradientText";
+import { isWeb } from "@/utils";
 import { categories } from "@/utils/data";
 import { useRouter } from "expo-router";
-import { ScrollView, Text, View } from "react-native";
+import { Platform, ScrollView, Text, View } from "react-native";
 
 export default function HomeScreen() {
   const router = useRouter();
   return (
     <>
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-        <View className="px-4 pt-6 pb-4">
-          <View className="py-4">
-            <GradientText />
-          </View>
-          <Text className="text-gray-600 text-base leading-6 font-poppins-regular ">
-            Discover curated collections of stunning wallpapers. Browse by
-            category, preview in full-screen, and set your favorites.
-          </Text>
+        <View className="p-4">
+          <ActiveWallpaper imageUri={categories[0].image} />
         </View>
 
         <View className="py-4">
@@ -30,15 +25,26 @@ export default function HomeScreen() {
             </Button>
           </View>
 
-          {categories.map((category) => (
-            <CategoryCard
-              key={category.id}
-              category={category}
-              onPress={() =>
-                router.push(`/category/${category.id}?name=${category.title}`)
-              }
-            />
-          ))}
+          <View
+            style={{
+              flexDirection: Platform.OS === "web" ? "row" : "column",
+              overflow: "hidden",
+              flexWrap: Platform.OS === "web" ? "wrap" : 'nowrap',
+              marginInline: Platform.OS === "web" ? "auto" : 0,
+              gap: isWeb ? 12 : 0,
+              paddingHorizontal: isWeb ? 10 : 0
+            }}
+          >
+            {categories.map((category) => (
+              <CategoryCard
+                key={category.id}
+                category={category}
+                onPress={() =>
+                  router.push(`/category/${category.id}?name=${category.title}`)
+                }
+              />
+            ))}
+          </View>
         </View>
       </ScrollView>
     </>
