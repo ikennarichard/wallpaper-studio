@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import WallpaperSetupModal from "@/components/WalPaperSetupModal";
 import { colors } from "@/constants/colors";
+import { wallpapers } from "@/constants/data";
 import { Wallpaper } from "@/types";
 import { isWeb } from "@/utils";
 import { BlurView } from "expo-blur";
@@ -36,13 +37,12 @@ export default function WallpaperPreviewModal({
   wallpaper?: Wallpaper;
 }) {
   const router = useRouter();
-  const { id, title, category, image } = useLocalSearchParams();
+  const { id, title, category, image, description } = useLocalSearchParams();
   const [isFavorite, setIsFavorite] = useState(false);
   const [showSetupWallpeaper, setShowSetupWallpaper] = useState(false);
 
-  const tags = ["Nature", "Ambience", "Flowers"];
-  const description =
-    'Discover the pure beauty of "Natural Essence" - your gateway to authentic, nature-inspired experiences. Let this unique collection elevate your senses and connect you with the unrefined elegance of the natural world.';
+  const wallpaperIndex = wallpapers.findIndex((item) => item.id === id);
+  const tags = wallpapers[wallpaperIndex].tags;
 
   const renderContent = () => (
     <View style={styles.modalOverlay}>
@@ -62,7 +62,8 @@ export default function WallpaperPreviewModal({
         <ScrollView
           contentContainerStyle={{
             marginHorizontal: "auto",
-            padding: isWeb ? 40 : 12,
+            overflow: "hidden",
+            padding: isWeb ? 40 : 5,
             marginVertical: isWeb ? 0 : 35,
             flexDirection: isWeb ? "row-reverse" : "column",
             alignItems: isWeb ? "center" : "stretch",
@@ -111,18 +112,34 @@ export default function WallpaperPreviewModal({
 
             <View className="mb-3">
               <Text className="text-gray-400 text-sm mb-2">Tags</Text>
-              <View className="flex-row flex-wrap gap-2">
-                {wallpaper?.tags && wallpaper.tags.map((tag, index) => (
-                  <View
-                    key={index}
-                    className="px-3 py-1.5 rounded-2xl border border-gray-200"
-                    style={{ backgroundColor: colors.backgroundNeutral }}
-                  >
-                    <Text className="text-black text-sm font-poppins-regular">
-                      {tag}
-                    </Text>
-                  </View>
-                ))}
+              <View
+                className="flex-row flex-wrap gap-2"
+                style={{ maxWidth: 200, flexWrap: "wrap" }}
+              >
+                {wallpaper?.tags &&
+                  wallpaper.tags.map((tag, index) => (
+                    <View
+                      key={index}
+                      className="px-3 py-1.5 rounded-2xl border border-gray-200"
+                      style={{ backgroundColor: colors.backgroundNeutral }}
+                    >
+                      <Text className="text-black text-sm font-poppins-regular">
+                        {tag}
+                      </Text>
+                    </View>
+                  ))}
+                {tags &&
+                  tags.map((tag, index) => (
+                    <View
+                      key={index}
+                      className="px-3 py-1.5 rounded-2xl border border-gray-200"
+                      style={{ backgroundColor: colors.backgroundNeutral }}
+                    >
+                      <Text className="text-black text-sm font-poppins-regular">
+                        {tag}
+                      </Text>
+                    </View>
+                  ))}
               </View>
             </View>
 
@@ -141,7 +158,7 @@ export default function WallpaperPreviewModal({
                   className="text-gray-600 text-sm leading-5 font-poppins-medium"
                   numberOfLines={4}
                 >
-                  {wallpaper?.description}
+                  {wallpaper?.description || description}
                 </Text>
               </View>
               {!isWeb ? (

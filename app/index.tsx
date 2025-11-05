@@ -40,7 +40,13 @@ export default function HomeScreen() {
                 key={category.id}
                 category={category}
                 onPress={() =>
-                  router.push(`/category/${category.id}?name=${category.title}`)
+                  router.push({
+                    pathname: '/category/[id]',
+                    params: {
+                      id: category.id,
+                      name: category.title
+                    }
+                  })
                 }
               />
             ))}

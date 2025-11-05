@@ -7,7 +7,7 @@ import Card from "./Card";
 
 interface WallpaperCardProps {
   wallpaper: Wallpaper;
-  onPress?: () => void;
+  onPress: () => void;
   onFavoritePress?: () => void;
   isFavorite?: boolean;
 }

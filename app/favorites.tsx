@@ -61,7 +61,7 @@ export default function Favorites() {
     );
   }
   return (
-    <View style={{ flex: 1, paddingVertical: 15, paddingInline: 15 }}>
+    <View style={{ flex: 1, paddingVertical: 15, paddingInline: isWeb ? 12 : 6 }}>
       <GradientText text="Saved Wallpapers" />
       <Text className="font-poppins-regular text-sm text-textSecondary">
         Your saved wallpaper collection
@@ -76,18 +76,18 @@ export default function Favorites() {
             justifyContent: isWeb ? 'flex-start' : "space-between",
             flexWrap: "wrap",
             width: "100%",
-            gap: 12
+            gap: isWeb ? 12 : 4, 
           }}
         >
           {favorites.map((wallpaper) => (
             <View
               key={wallpaper.id}
               style={{
-                width: 185,
+                width: isWeb ? 185 : 165,
                 minHeight: 290,
-                marginBottom: 8,
+                marginBottom: 3,
               }}
-              className="mb-2"
+              className="mb-1"
             >
               <WallpaperCard
                 wallpaper={{

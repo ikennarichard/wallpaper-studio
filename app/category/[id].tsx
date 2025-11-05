@@ -5,7 +5,7 @@ import { useFavorites } from "@/context/FavoriteContext";
 import { isWeb } from "@/utils";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Platform,
   ScrollView,
@@ -23,17 +23,28 @@ export default function CategoryScreen() {
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const categoryWallpapers = wallpapers.filter((w) => w.category === name);
-  const [selectedWallpaper, setSelectedWallpaper] = useState(wallpapers[0]);
+  const [selectedWallpaper, setSelectedWallpaper] = useState<any>(undefined);
 
-  const handleWallpaperPress = (wallpaper: any) => {
-    if (Platform.OS === "web") {
-      setSelectedWallpaper(wallpaper);
-    } else {
-      router.push({
-        pathname: "/wallpaper/[id]",
-        params: wallpaper,
-      });
+  useEffect(() => {
+    if (isWeb) {
+      setSelectedWallpaper(wallpapers[0]);
     }
+  }, []);
+
+  const handleWallpaperPress = (wallpaper?: any) => {
+    if (isWeb) {
+      setSelectedWallpaper(wallpaper);
+      return;
+    }
+    router.navigate({
+      pathname: "/wallpaper/[id]",
+      params: {
+        id: wallpaper.id,
+        image: wallpaper.image,
+        title: wallpaper.title,
+        description: wallpaper.description,
+      },
+    });
   };
 
   return (
@@ -63,7 +74,7 @@ export default function CategoryScreen() {
         <ScrollView
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ padding: 16 }}
+          contentContainerStyle={{ padding: isWeb ? 16 : 6 }}
         >
           {view === "grid" ? (
             <View
@@ -71,15 +82,15 @@ export default function CategoryScreen() {
                 flexDirection: "row",
                 justifyContent: isWeb ? "flex-start" : "space-between",
                 flexWrap: "wrap",
-                width: isWeb ? 611 : "100%",
-                gap: 23,
+                width: isWeb ? 611 : "auto",
+                gap: isWeb ? 23 : 5,
               }}
             >
               {categoryWallpapers.map((wallpaper) => (
                 <View
                   key={wallpaper.id}
                   style={{
-                    width: 185,
+                    width: isWeb ? 185 : 165,
                     minHeight: 290,
                     marginBottom: 8,
                   }}
@@ -117,7 +128,10 @@ export default function CategoryScreen() {
             </View>
           )}
         </ScrollView>
-        <WallpaperPreviewModal wallpaper={selectedWallpaper} isVisible={true} />
+        <WallpaperPreviewModal
+          wallpaper={selectedWallpaper}
+          isVisible={isWeb ? true : false}
+        />
       </View>
     </View>
   );
