@@ -2,7 +2,7 @@
 
 > A beautiful, cross-platform wallpaper discovery and management application built with React Native.
 
-[![React Native](https://img.shields.io/badge/React%20Native-Expo-blue)](https://expo.dev)
+[![React Native/Expo](https://img.shields.io/badge/React%20Native-Expo-blue)](https://expo.dev)
 [![Tauri](https://img.shields.io/badge/Tauri-Desktop-orange)](https://tauri.app)
 
 ## 📱 Features
@@ -16,6 +16,8 @@
 
 ## 🚀 Quick Start
 
+- ![screenhot](./assets//images//desktop-screenshot.PNG)
+
 ### Prerequisites
 
 - **Node.js** 22.x or higher
@@ -23,6 +25,11 @@
 - **Expo** (installed automatically)
 - **For Desktop Builds:**
   - Windows: Visual Studio Build Tools, Rust, WebView2
+
+### Demo
+
+- [Video](https://drive.google.com/file/d/1K05_kTLpl5dzGbiwJklRuVSXoPOFZ-7n/view?usp=drivesdk)
+- [Live](https://appetize.io/app/b_xb5lq35k5hwel7sbwrdb7pegmy)
 
 ### Installation
 
@@ -103,7 +110,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Ikenna Richard** - *Initial work* - [Github](https://github.com/yourusername)
+- **Ikenna Richard** - *Initial work* - [Github](https://github.com/ikennarichard)
 
 ## 🙏 Acknowledgments
 
