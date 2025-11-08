@@ -29,8 +29,8 @@ export default function Favorites() {
       <View style={{ flex: 1, paddingVertical: 15, paddingInline: 15 }}>
         <GradientText text="Saved Wallpapers" variant={isWeb ? "lg" : "sm"} />
         <Text
-          className="font-poppins-regular text-sm text-textSecondary"
-          style={{ fontSize: 24 }}
+          className="font-poppins-regular text-textSecondary"
+          style={{ fontSize: isWeb ? 24 : 14 }}
         >
           Your saved wallpaper collection
         </Text>
@@ -67,8 +67,11 @@ export default function Favorites() {
     <View
       style={{ flex: 1, paddingVertical: 15, paddingInline: isWeb ? 12 : 6 }}
     >
-      <GradientText text="Saved Wallpapers" />
-      <Text className="font-poppins-regular">
+      <GradientText text="Saved Wallpapers" variant={isWeb ? "lg" : "sm"} />
+      <Text
+        className="font-poppins-regular text-textSecondary"
+        style={{ fontSize: isWeb ? 24 : 14 }}
+      >
         Your saved wallpaper collection
       </Text>
       <ScrollView
