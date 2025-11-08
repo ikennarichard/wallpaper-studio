@@ -28,7 +28,10 @@ export default function Favorites() {
     return (
       <View style={{ flex: 1, paddingVertical: 15, paddingInline: 15 }}>
         <GradientText text="Saved Wallpapers" variant={isWeb ? "lg" : "sm"} />
-        <Text className="font-poppins-regular text-sm text-textSecondary">
+        <Text
+          className="font-poppins-regular text-sm text-textSecondary"
+          style={{ fontSize: 24 }}
+        >
           Your saved wallpaper collection
         </Text>
         <View className="flex-1 items-center justify-center">
@@ -61,9 +64,11 @@ export default function Favorites() {
     );
   }
   return (
-    <View style={{ flex: 1, paddingVertical: 15, paddingInline: isWeb ? 12 : 6 }}>
+    <View
+      style={{ flex: 1, paddingVertical: 15, paddingInline: isWeb ? 12 : 6 }}
+    >
       <GradientText text="Saved Wallpapers" />
-      <Text className="font-poppins-regular text-sm text-textSecondary">
+      <Text className="font-poppins-regular">
         Your saved wallpaper collection
       </Text>
       <ScrollView
@@ -73,10 +78,10 @@ export default function Favorites() {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: isWeb ? 'flex-start' : "space-between",
+            justifyContent: isWeb ? "flex-start" : "space-between",
             flexWrap: "wrap",
             width: "100%",
-            gap: isWeb ? 12 : 4, 
+            gap: isWeb ? 12 : 4,
           }}
         >
           {favorites.map((wallpaper) => (

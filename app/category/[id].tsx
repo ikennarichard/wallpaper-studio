@@ -48,7 +48,7 @@ export default function CategoryScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View className="px-4 pt-5 pb-2">
         <TouchableOpacity
           onPress={() => router.back()}
@@ -71,10 +71,8 @@ export default function CategoryScreen() {
       </View>
 
       <View style={styles.contentWrapper}>
-        <ScrollView
+        <View
           style={styles.scrollView}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ padding: isWeb ? 16 : 6 }}
         >
           {view === "grid" ? (
             <View
@@ -127,13 +125,13 @@ export default function CategoryScreen() {
               ))}
             </View>
           )}
-        </ScrollView>
+        </View>
         <WallpaperPreviewModal
           wallpaper={selectedWallpaper}
           isVisible={isWeb ? true : false}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -149,6 +147,7 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flex: 1,
     flexDirection: "row",
+    paddingHorizontal: 10,
     ...(Platform.OS === "web" && {
       height: "100%",
       overflow: "hidden",

@@ -25,7 +25,7 @@ export default function BrowseScreen() {
             text="Browse Categories"
             variant={isWeb ? "lg" : "sm"}
           />
-          <Text className="text-gray-600 leading-6 font-poppins-regular my-2 text-sm">
+          <Text className="text-gray-600 leading-6 font-poppins-regular my-2" style={{fontSize: isWeb ? 24 : 14}}>
             Explore our curated collections of stunning wallpapers
           </Text>
         </View>

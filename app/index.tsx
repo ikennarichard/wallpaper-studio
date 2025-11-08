@@ -17,11 +17,11 @@ export default function HomeScreen() {
 
         <View className="py-4">
           <View className="flex-row justify-between items-center mb-4 px-4">
-            <Text className="text-xl text-black font-poppins-medium font-medium">
+            <Text className="text-2xl text-black font-poppins-medium font-medium">
               Categories
             </Text>
             <Button variant="light" size="sm">
-              <Text>See All</Text>
+              <Text className="font-poppins-regular text-xl text-gray-400">See All</Text>
             </Button>
           </View>
 

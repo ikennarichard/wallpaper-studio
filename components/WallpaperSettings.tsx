@@ -3,32 +3,31 @@ import { isWeb } from "@/utils";
 import { Picker } from "@react-native-picker/picker";
 import { Link } from "lucide-react-native";
 import React, { useState } from "react";
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Switch,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Switch, Text, View } from "react-native";
 
 export default function WallpaperSettings() {
   const [imageQuality, setImageQuality] = useState("high");
   const [notifications, setNotifications] = useState(true);
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
+    <View
+      // showsVerticalScrollIndicator={false}
+      style={{
         backgroundColor: "white",
         borderRadius: 20,
         padding: 20,
         marginBottom: 50,
         flexDirection: isWeb ? "row" : "column",
         justifyContent: isWeb ? "space-around" : "flex-start",
+        marginTop: 15,
       }}
     >
-      <View style={{ paddingVertical: isWeb ? 30 : 0 }}>
+      <View
+        style={{
+          paddingVertical: isWeb ? 30 : 0,
+          width: isWeb ? 568 : "auto",
+        }}
+      >
         <Text style={styles.title} className="font-poppins-medium">
           Wallpaper Setup
         </Text>
@@ -64,6 +63,7 @@ export default function WallpaperSettings() {
               value={notifications}
               onValueChange={setNotifications}
               thumbColor={notifications ? "#fff" : "#f4f3f4"}
+              activeThumbColor="#fff"
               trackColor={{ false: "#E5E7EB", true: "#FBB03B" }}
             />
           </View>
@@ -102,7 +102,7 @@ export default function WallpaperSettings() {
           </View>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -151,14 +151,17 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   buttons: {
+    flexDirection: isWeb ? "row" : "column",
     gap: 12,
     marginTop: 12,
+    justifyContent: isWeb ? "flex-end" : "flex-start",
   },
   button: {
     height: 50,
-    borderRadius: 12,
+    borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
+    width: isWeb ? 200 : 359,
   },
   cancelButton: {
     backgroundColor: "#F9FAFB",

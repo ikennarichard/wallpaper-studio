@@ -4,7 +4,6 @@ import { useState } from "react";
 import {
   Modal,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -67,13 +66,13 @@ export default function WallpaperSetupModal({
 
   const renderContent = () => (
     <View style={styles.overlay}>
-      <TouchableOpacity
-        style={styles.backdrop}
-        activeOpacity={1}
-        onPress={onClose}
-      />
-      <View className="flex-1 bg-white" style={styles.modalOverlay}>
-        <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+      <View className="flex-1 w-full" style={styles.modalOverlay}>
+        <TouchableOpacity
+          style={styles.backdrop}
+          activeOpacity={1}
+          onPress={onClose}
+        />
+        <View className="flex-1 max-w-xl ml-auto bg-white">
           <View className="px-6 pt-12 pb-6">
             <Text className="text-2xl font-poppins-medium mb-2">
               Wallpaper Setup
@@ -107,7 +106,7 @@ export default function WallpaperSetupModal({
             <Text className="text-xl font-poppins-regular text-black mb-4">
               Display mode
             </Text>
-            <View className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <View className="bg-white rounded-2xl border border-gray-200">
               {displayModes.map((mode, index) => (
                 <TouchableOpacity
                   key={mode.value}
@@ -178,7 +177,7 @@ export default function WallpaperSetupModal({
             <Text className="text-xl font-poppins-regular text-gray-900 mb-4">
               Advanced Settings
             </Text>
-            <View className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+            <View className="bg-white rounded-2xl border border-gray-200">
               <TouchableOpacity
                 onPress={() =>
                   setSettings({
@@ -257,7 +256,7 @@ export default function WallpaperSetupModal({
               <Text className="font-poppins-medium text-sm">Cancel</Text>
             </Button>
           </View>
-        </ScrollView>
+        </View>
       </View>
     </View>
   );
@@ -282,15 +281,17 @@ export default function WallpaperSetupModal({
 const styles = StyleSheet.create({
   modalOverlay: {
     width: "95%",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
     marginHorizontal: "auto",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     marginTop: 60,
-    maxWidth: 400,
+    // maxWidth: 400,
     ...(Platform.OS === "web" && {
-      width: 600,
-      maxWidth: 600,
-      height: "100%",
+      position: "fixed",
+      right: 0,
+      // borderWidth: 1,
+      // height: "100%",
       borderTopLeftRadius: 0,
       borderTopRightRadius: 0,
       marginTop: 0,
@@ -300,14 +301,12 @@ const styles = StyleSheet.create({
 
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    // backgroundColor: "rgba(0, 0, 0, 0.4)",
     ...(Platform.OS === "web" && {
       position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      zIndex: 1000,
+      height: "auto",
+      inset: 0,
+      zIndex: 1,
       flexDirection: "row",
       justifyContent: "flex-start",
       alignItems: "stretch",
@@ -317,6 +316,9 @@ const styles = StyleSheet.create({
   backdrop: {
     ...(Platform.OS === "web" && {
       flex: 1,
+      position: 'absolute',
+      width: '100%',
+      height: '100%'
     }),
   },
 });
