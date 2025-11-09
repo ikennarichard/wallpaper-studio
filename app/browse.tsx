@@ -11,9 +11,9 @@ export default function BrowseScreen() {
   const [view, setView] = useState<any>("grid");
   const router = useRouter();
   return (
-    <ScrollView className="flex-1 " showsVerticalScrollIndicator={false}>
+    <ScrollView className="flex-1 px-6" showsVerticalScrollIndicator={false}>
       <View
-        className="px-4 pt-6 pb-4 gap-2"
+        className="pt-6 pb-4 gap-2"
         style={{
           flexDirection: isWeb ? "row" : "column",
           alignItems: isWeb ? "center" : "flex-start",
@@ -42,7 +42,7 @@ export default function BrowseScreen() {
           marginInline: isWeb ? "auto" : 0,
           gap: isWeb ? 12 : 0,
           width: isWeb ? "100%" : "auto",
-          paddingHorizontal: isWeb && view === "grid" ? 10 : 0,
+          // paddingHorizontal: isWeb && view === "grid" ? 10 : 0,
         }}
       >
         {categories.map((category) => (

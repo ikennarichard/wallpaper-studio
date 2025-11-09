@@ -48,7 +48,7 @@ export default function CategoryScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} className="p-5">
       <View className="px-4 pt-5 pb-2">
         <TouchableOpacity
           onPress={() => router.back()}
@@ -56,13 +56,13 @@ export default function CategoryScreen() {
           activeOpacity={0.7}
           style={{ marginTop: 15, gap: 3 }}
         >
-          <ArrowLeft size={15} />
-          <Text className="text-custom-light font-poppins-regular text-lg">
+          <ArrowLeft size={15} className="text-gray-500" />
+          <Text className="text-gray-500 font-poppins-regular text-lg">
             Back to Categories
           </Text>
         </TouchableOpacity>
 
-        <View className="flex-row items-center justify-between">
+        <View className="flex-row items-center max-w-xl mb-4 justify-between">
           <Text style={{ fontSize: 48, fontFamily: "Clash-Display-Regular" }}>
             {name}
           </Text>
@@ -71,9 +71,7 @@ export default function CategoryScreen() {
       </View>
 
       <View style={styles.contentWrapper}>
-        <View
-          style={styles.scrollView}
-        >
+        <View style={styles.scrollView}>
           {view === "grid" ? (
             <View
               style={{
@@ -81,7 +79,7 @@ export default function CategoryScreen() {
                 justifyContent: isWeb ? "flex-start" : "space-between",
                 flexWrap: "wrap",
                 width: isWeb ? 611 : "auto",
-                gap: isWeb ? 23 : 5,
+                gap: isWeb ? 18 : 5,
               }}
             >
               {categoryWallpapers.map((wallpaper) => (
@@ -141,7 +139,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F9FAFB",
     ...(Platform.OS === "web" && {
       height: "100%",
-      overflow: "hidden",
     }),
   },
   contentWrapper: {
@@ -150,7 +147,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     ...(Platform.OS === "web" && {
       height: "100%",
-      overflow: "hidden",
+      // overflow: "hidden",
     }),
   },
   scrollView: {

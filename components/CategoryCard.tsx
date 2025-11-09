@@ -25,7 +25,7 @@ export default function CategoryCard({
       <TouchableOpacity
         onPress={onPress}
         activeOpacity={0.9}
-        className="flex-1 w-full border-b border-gray-200 pb-3 mx-4"
+        className="flex-1 w-full border-b border-gray-200 pb-3 "
       >
         <View className="flex flex-row gap-5">
           <Image
@@ -70,7 +70,7 @@ export default function CategoryCard({
       <Card
         className="max-w-md mx-4 md:mx-0 mb-4"
         style={{
-          width: isWeb ? 410 : 'auto',
+          width: isWeb ? 425 : 'auto',
           height: isWeb ? 290 : 192
         }}
       >

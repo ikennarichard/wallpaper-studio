@@ -26,7 +26,7 @@ export default function Favorites() {
   };
   if (favorites.length === 0) {
     return (
-      <View style={{ flex: 1, paddingVertical: 15, paddingInline: 15 }}>
+      <View style={{ flex: 1, paddingVertical: 15, paddingInline: 20 }}>
         <GradientText text="Saved Wallpapers" variant={isWeb ? "lg" : "sm"} />
         <Text
           className="font-poppins-regular text-textSecondary"
@@ -65,7 +65,7 @@ export default function Favorites() {
   }
   return (
     <View
-      style={{ flex: 1, paddingVertical: 15, paddingInline: isWeb ? 12 : 6 }}
+      style={{ flex: 1, paddingVertical: 15, paddingInline: isWeb ? 20 : 10 }}
     >
       <GradientText text="Saved Wallpapers" variant={isWeb ? "lg" : "sm"} />
       <Text

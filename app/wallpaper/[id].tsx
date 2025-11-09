@@ -47,12 +47,10 @@ export default function WallpaperPreviewModal({
     <View style={styles.modalOverlay}>
       <LinearGradient
         colors={["#ffffff", "#ffffff00"]} // white to transparent
-         style={Platform.OS === "web" ? styles.webContainer : { height }}
-          className=" flex-1 rounded-2xl overflow-hidden w-full max-w-sm pb-6"
+        style={Platform.OS === "web" ? styles.webContainer : { height }}
+        className=" flex-1 rounded-2xl w-full max-w-sm pb-6"
       >
-        <View
-        
-        >
+        <View>
           {!isWeb ? (
             <TouchableOpacity
               onPress={() => router.back()}
@@ -95,7 +93,7 @@ export default function WallpaperPreviewModal({
                   gap: 12,
                   flexDirection: "row",
                   position: "fixed",
-                  bottom: -150,
+                  bottom: -30,
                   // width: "100%",
 
                   right: 15,
@@ -113,6 +111,7 @@ export default function WallpaperPreviewModal({
                     alignItems: "center",
                     gap: 6,
                     paddingVertical: 12,
+                    width: 200
                   }}
                   activeOpacity={0.8}
                 >
@@ -129,7 +128,7 @@ export default function WallpaperPreviewModal({
 
                 <Button
                   onPress={() => setShowSetupWallpaper(true)}
-                  style={{ marginBottom: 20, paddingVertical: 12 }}
+                  style={{ marginBottom: 20, paddingVertical: 12, width: 200 }}
                 >
                   <Text className="text-white text-sm font-poppins-medium">
                     Set to Wallpaper
@@ -153,14 +152,14 @@ export default function WallpaperPreviewModal({
                 Preview
               </Text>
 
-              <View className="mb-3">
+              <View>
                 <Text className="text-gray-400 text-sm mb-1">Name</Text>
                 <Text className="text-black text-2xl font-poppins-medium">
                   {title ? title : wallpaper?.title}
                 </Text>
               </View>
 
-              <View className="mb-3">
+              <View>
                 <Text className="text-gray-400 text-sm mb-2">Tags</Text>
                 <View
                   className="flex-row flex-wrap gap-2"
@@ -178,7 +177,7 @@ export default function WallpaperPreviewModal({
                         </Text>
                       </View>
                     ))}
-                  {tags &&
+                  {/* {tags &&
                     tags.map((tag, index) => (
                       <View
                         key={index}
@@ -189,7 +188,7 @@ export default function WallpaperPreviewModal({
                           {tag}
                         </Text>
                       </View>
-                    ))}
+                    ))} */}
                 </View>
               </View>
 
@@ -226,7 +225,7 @@ export default function WallpaperPreviewModal({
                 />
               </View>
 
-              <View className="flex-row gap-2 mb-4">
+              <View className="flex-row gap-2" style={{marginBottom: 40}}>
                 <TouchableOpacity style={styles.iconContainer}>
                   <Upload size={18} color={colors.text.light} />
                 </TouchableOpacity>
@@ -285,7 +284,7 @@ export default function WallpaperPreviewModal({
 const styles = StyleSheet.create({
   descriptionContainer: {
     position: "relative",
-    overflow: "hidden",
+    // overflow: "hidden",
     borderRadius: 8,
     minHeight: 120,
   },
@@ -310,7 +309,7 @@ const styles = StyleSheet.create({
   descriptionContent: {
     position: "relative",
     zIndex: 1,
-    padding: 16,
+    paddingVertical: 16,
   },
   container: {
     // position: 'relative',
@@ -319,11 +318,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: isWeb ? "auto" : 0,
     height: "100%",
+    
   },
 
   webContainer: {
+  
     maxHeight: "90%",
     alignSelf: "center",
+  
+    // borderWidth: 1,
   },
 
   iconContainer: {
@@ -343,7 +346,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 50,
     paddingBottom: 20,
+    //  transform: [{translateY: -60 }],
     ...(Platform.OS === "web" && {
+       transform: [{translateY: -120 }],
       width: "100%",
       backgroundColor: "none",
       paddingHorizontal: 0,
@@ -353,8 +358,8 @@ const styles = StyleSheet.create({
   },
 
   phoneFrame: {
-    width: isWeb ? 160 : 200,
-    height: isWeb ? 325 : 425,
+    width: isWeb ? 258 : 200,
+    height: isWeb ? 524 : 425,
     borderRadius: 35,
     backgroundColor: "#000",
     overflow: "hidden",
