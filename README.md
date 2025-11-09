@@ -29,7 +29,7 @@
 ### Demo
 
 - [Video](https://drive.google.com/file/d/1K05_kTLpl5dzGbiwJklRuVSXoPOFZ-7n/view?usp=drivesdk)
-- [Live](https://appetize.io/app/b_xb5lq35k5hwel7sbwrdb7pegmy)
+- [Live](https://incomparable-scone-7fb087.netlify.app/)
 
 ### Installation
 
