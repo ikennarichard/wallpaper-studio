@@ -119,4 +119,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - UI inspiration from various wallpaper apps
 - Built with [Expo](https://expo.dev) and [Tauri](https://tauri.app)
 
-Made with ❤️ by [](https://ikennarichard.vercel.app)
+Made with ❤️ by [Ikenna Richard](https://ikennarichard.vercel.app)
