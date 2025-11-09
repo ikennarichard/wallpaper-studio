@@ -20,20 +20,26 @@ export default function CategoryScreen() {
   const router = useRouter();
   const { id, name } = useLocalSearchParams();
   const [view, setView] = useState<"grid" | "list">("grid");
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const {
+    isFavorite,
+    toggleFavorite,
+    selectedWallpaper,
+    setSelectedWallpaper,
+    setActiveWallpaper,
+  } = useFavorites();
 
   const categoryWallpapers = wallpapers.filter((w) => w.category === name);
-  const [selectedWallpaper, setSelectedWallpaper] = useState<any>(undefined);
 
   useEffect(() => {
     if (isWeb) {
-      setSelectedWallpaper(wallpapers[0]);
+      setSelectedWallpaper(categoryWallpapers[0]);
     }
   }, []);
 
   const handleWallpaperPress = (wallpaper?: any) => {
     if (isWeb) {
       setSelectedWallpaper(wallpaper);
+      setActiveWallpaper(wallpaper);
       return;
     }
     router.navigate({

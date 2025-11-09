@@ -5,6 +5,7 @@ import {
   Modal,
   Platform,
   StyleSheet,
+  Switch,
   Text,
   TouchableOpacity,
   View,
@@ -72,7 +73,10 @@ export default function WallpaperSetupModal({
           activeOpacity={1}
           onPress={onClose}
         />
-        <View className="flex-1 max-w-xl ml-auto bg-white">
+        <View
+          className="flex-1 ml-auto bg-white"
+          style={{ maxWidth: 656, paddingHorizontal: 10 }}
+        >
           <View className="px-6 pt-12 pb-6">
             <Text className="text-2xl font-poppins-medium mb-2">
               Wallpaper Setup
@@ -153,24 +157,19 @@ export default function WallpaperSetupModal({
                 Automatically change your wallpaper at regular intervals
               </Text>
             </View>
-            <TouchableOpacity
-              onPress={() =>
+
+            <Switch
+              value={settings.autoRotation}
+              onValueChange={() =>
                 setSettings({
                   ...settings,
                   autoRotation: !settings.autoRotation,
                 })
               }
-              className={`w-14 h-8 rounded-full p-1 ${
-                settings.autoRotation ? "bg-accent" : "bg-gray-300"
-              }`}
-              activeOpacity={0.8}
-            >
-              <View
-                className={`w-6 h-6 rounded-full bg-white ${
-                  settings.autoRotation ? "self-end" : "self-start"
-                }`}
-              />
-            </TouchableOpacity>
+              thumbColor={settings.autoRotation ? "#fff" : "#f4f3f4"}
+              activeThumbColor="#fff"
+              trackColor={{ false: "#E5E7EB", true: "#FBB03B" }}
+            />
           </View>
 
           <View className="px-6 mb-6">
@@ -316,9 +315,9 @@ const styles = StyleSheet.create({
   backdrop: {
     ...(Platform.OS === "web" && {
       flex: 1,
-      position: 'absolute',
-      width: '100%',
-      height: '100%'
+      position: "absolute",
+      width: "100%",
+      height: "100%",
     }),
   },
 });

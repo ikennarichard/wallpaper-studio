@@ -25,7 +25,7 @@ export default function ActiveWallpaper({
   imageUri,
   localImage,
   category = "Nature",
-  selection = "Wallpaper 5",
+  selection = "Mountain Peak",
 }: Props) {
   const imageSource = localImage
     ? localImage
@@ -59,11 +59,11 @@ export default function ActiveWallpaper({
 
         <View style={styles.meta}>
           <View>
-            <Text style={styles.metaText}>
-              Category - <Text style={styles.metaBold}>{category}</Text>
+            <Text className="font-poppins-regular" style={styles.metaText}>
+              Category - <Text className="font-poppins-medium" style={styles.metaBold}>{category}</Text>
             </Text>
-            <Text style={[styles.metaText, { marginTop: 6 }]}>
-              Selection - <Text style={styles.metaBold}>{selection}</Text>
+            <Text className="font-poppins-regular" style={[styles.metaText, { marginTop: 6 }]}>
+              Selection - <Text className="font-poppins-medium" style={styles.metaBold}>{selection}</Text>
             </Text>
           </View>
 
@@ -126,8 +126,9 @@ const styles = StyleSheet.create({
   phoneFrame: {
     width: 117,
     height: 210,
-    borderRadius: Math.round(PHONE_WIDTH * 0.17),
+    // borderRadius: Math.round(PHONE_WIDTH * 0.17),
     borderWidth: 3,
+      borderRadius: 20,
     borderColor: "#E5E7EB",
     backgroundColor: "#fff",
     overflow: "hidden",
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
   phoneImage: {
     width: "100%",
     height: "100%",
-    borderRadius: 12,
+  
     overflow: "hidden",
   },
   emptyPhone: {
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
   },
   description: {
     color: "#6b7280",
-    fontSize: 13,
+    fontSize: 20,
     marginBottom: 10,
   },
   meta: {
@@ -204,7 +205,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   metaBold: {
-    fontWeight: "600",
     color: "#111827",
   },
 

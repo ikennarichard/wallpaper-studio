@@ -1,13 +1,16 @@
 import { colors } from "@/constants/colors";
 import { isWeb } from "@/utils";
 import { Picker } from "@react-native-picker/picker";
+import { useRouter } from "expo-router";
 import { Link } from "lucide-react-native";
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Switch, Text, View } from "react-native";
 
-export default function WallpaperSettings() {
+export default function  WallpaperSettings() {
   const [imageQuality, setImageQuality] = useState("high");
   const [notifications, setNotifications] = useState(true);
+
+  const router = useRouter()
 
   return (
     <View
@@ -73,7 +76,7 @@ export default function WallpaperSettings() {
         </View>
         <View style={styles.buttons}>
           <Pressable style={[styles.button, styles.cancelButton]}>
-            <Text style={styles.cancelText} className="font-poppins-regular">
+            <Text style={styles.cancelText} className="font-poppins-regular" onPress={() => router.navigate('/')}>
               Cancel
             </Text>
           </Pressable>

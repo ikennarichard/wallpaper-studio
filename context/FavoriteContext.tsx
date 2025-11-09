@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { Wallpaper } from '@/types';
+import { Wallpaper } from "@/types";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface FavoritesContextType {
   favorites: Wallpaper[];
@@ -7,16 +7,24 @@ interface FavoritesContextType {
   removeFavorite: (wallpaperId: string) => void;
   isFavorite: (wallpaperId: string) => boolean;
   toggleFavorite: (wallpaper: Wallpaper) => void;
+  setSelectedWallpaper: any;
+  selectedWallpaper: any;
+  setActiveWallpaper: any;
+  activeWallpaper: any;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
+const FavoritesContext = createContext<FavoritesContextType | undefined>(
+  undefined
+);
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<Wallpaper[]>([]);
+  const [selectedWallpaper, setSelectedWallpaper] = useState<any>(undefined);
+  const [activeWallpaper, setActiveWallpaper] = useState<any>(undefined);
 
   const addFavorite = (wallpaper: Wallpaper) => {
-    setFavorites(prev => {
-      if (prev.some(fav => fav.id === wallpaper.id)) {
+    setFavorites((prev) => {
+      if (prev.some((fav) => fav.id === wallpaper.id)) {
         return prev;
       }
       return [...prev, wallpaper];
@@ -24,11 +32,11 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   };
 
   const removeFavorite = (wallpaperId: string) => {
-    setFavorites(prev => prev.filter(fav => fav.id !== wallpaperId));
+    setFavorites((prev) => prev.filter((fav) => fav.id !== wallpaperId));
   };
 
   const isFavorite = (wallpaperId: string) => {
-    return favorites.some(fav => fav.id === wallpaperId);
+    return favorites.some((fav) => fav.id === wallpaperId);
   };
 
   const toggleFavorite = (wallpaper: Wallpaper) => {
@@ -40,7 +48,19 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, isFavorite, toggleFavorite }}>
+    <FavoritesContext.Provider
+      value={{
+        favorites,
+        addFavorite,
+        removeFavorite,
+        isFavorite,
+        toggleFavorite,
+        setSelectedWallpaper,
+        selectedWallpaper,
+        activeWallpaper,
+        setActiveWallpaper,
+      }}
+    >
       {children}
     </FavoritesContext.Provider>
   );
@@ -49,7 +69,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 export function useFavorites() {
   const context = useContext(FavoritesContext);
   if (context === undefined) {
-    throw new Error('useFavorites must be used within a FavoritesProvider');
+    throw new Error("useFavorites must be used within a FavoritesProvider");
   }
   return context;
 }

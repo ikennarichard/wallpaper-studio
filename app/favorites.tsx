@@ -11,16 +11,33 @@ import { ScrollView, Text, View } from "react-native";
 
 export default function Favorites() {
   const router = useRouter();
-  const { favorites, toggleFavorite, isFavorite } = useFavorites();
+  const {
+    favorites,
+    toggleFavorite,
+    isFavorite,
+    selectedWallpaper,
+    setSelectedWallpaper,
+  } = useFavorites();
 
   const handleWallpaperPress = (wallpaper: any) => {
+    if (isWeb) {
+      setSelectedWallpaper(wallpaper);
+      router.push({
+        pathname: "/category/[id]",
+        params: {
+          id: wallpaper.id,
+          name: wallpaper.category,
+        },
+      });
+      return;
+    }
     router.push({
       pathname: "/wallpaper/[id]",
       params: {
         id: wallpaper.id,
-        title: wallpaper.title,
-        category: wallpaper.category,
         image: wallpaper.image,
+        title: wallpaper.title,
+        description: wallpaper.description,
       },
     });
   };
@@ -29,7 +46,7 @@ export default function Favorites() {
       <View style={{ flex: 1, paddingVertical: 15, paddingInline: 20 }}>
         <GradientText text="Saved Wallpapers" variant={isWeb ? "lg" : "sm"} />
         <Text
-          className="font-poppins-regular text-textSecondary"
+          className="font-poppins-regular text-gray-500"
           style={{ fontSize: isWeb ? 24 : 14 }}
         >
           Your saved wallpaper collection
@@ -69,7 +86,7 @@ export default function Favorites() {
     >
       <GradientText text="Saved Wallpapers" variant={isWeb ? "lg" : "sm"} />
       <Text
-        className="font-poppins-regular text-textSecondary"
+        className="font-poppins-regular text-gray-500"
         style={{ fontSize: isWeb ? 24 : 14 }}
       >
         Your saved wallpaper collection
